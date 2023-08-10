@@ -1,6 +1,8 @@
 # made with Python 3.10.11
 
 import random as rand
+import subprocess as subp
+import os
 
 global var1; var1 = 0
 global momba; momba = "Monday"
@@ -15,14 +17,29 @@ def rn_check(hit):
         return True
     else:
         return False
+    
+def print_2darray(a):
+    w, h = (len(a[0]), len(a))
+    print(flush=True)
+    for i in range(0, w+2):
+        print('-')
+    for i in range(0, h):
+        print('|')
+        for j in range(0, w):
+            print(a[i][j])
+        print('|')
+    for i in range(0, w+2):
+        print('-')
 
 def main():
-    rows, cols = (5, 5)
+    rows, cols = (15, 15)
     print("================")
     # method 2 2nd approach
     arr = [[0 for i in range(cols)] for j in range(rows)]
     for row in arr:
         print(row)
+    #os.system('cls')
+    print("console cleared")
 
 if __name__ == "__main__":
     main()
