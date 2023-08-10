@@ -20,26 +20,37 @@ def rn_check(hit):
     
 def print_2darray(a):
     w, h = (len(a[0]), len(a))
-    print(flush=True)
-    for i in range(0, w+2):
-        print('-')
+    #print(flush=True)          # flush console
+    # print top border
+    print('-', end=' ')
+    for i in range(0, w):
+        print('--', end=' ')
+    print('-')
+    # print array with leading + ending borders
     for i in range(0, h):
-        print('|')
+        print('|', end=' ')
         for j in range(0, w):
-            print(a[i][j])
+            if a[i][j] < 10:
+                print("0" + str(a[i][j]), end=' ')
+            else:
+                print(a[i][j], end=' ')
         print('|')
-    for i in range(0, w+2):
-        print('-')
+    # print bottom border
+    print('-', end=' ')
+    for i in range(0, w):
+        print('--', end=' ')
+    print('-')
 
 def main():
     rows, cols = (15, 15)
     print("================")
     # method 2 2nd approach
     arr = [[0 for i in range(cols)] for j in range(rows)]
-    for row in arr:
-        print(row)
+    #for row in arr:
+    #    print(row)
+    print_2darray(arr)
     #os.system('cls')
-    print("console cleared")
+    #print("console cleared")
 
 if __name__ == "__main__":
     main()

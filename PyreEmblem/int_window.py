@@ -8,8 +8,8 @@ button.pack()
 
 w = gui.Canvas(m, width=40, height=60)
 w.pack()
-canvas_h = 20
-canvas_w = 200
+canvas_h = 50
+canvas_w = 2000
 y = int(canvas_h / 2)
 w.create_line(0, y, canvas_w, y)
 
