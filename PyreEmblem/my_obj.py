@@ -41,15 +41,21 @@ def print_2darray(a):
         print('--', end=' ')
     print('-')
 
+# sets tiles in an array
+def gen_map(map):
+    return map
+
 def main():
-    rows, cols = (15, 15)
-    print("================")
-    # method 2 2nd approach
+    rows, cols = (6, 6)
     arr = [[0 for i in range(cols)] for j in range(rows)]
-    #for row in arr:
-    #    print(row)
     print_2darray(arr)
-    #os.system('cls')
+    os.system('cls')
+    for row in arr:
+        for i in range(len(row)):
+            if rand.randint(0,3) == 3:
+                row[i] = 1
+    print_2darray(arr)
+
     #print("console cleared")
 
 if __name__ == "__main__":
