@@ -43,19 +43,23 @@ def print_2darray(a):
 
 # sets tiles in an array
 def gen_map(map):
-    return map
-
-def main():
-    rows, cols = (6, 6)
-    arr = [[0 for i in range(cols)] for j in range(rows)]
-    print_2darray(arr)
-    os.system('cls')
-    for row in arr:
+    # for each row, assign 1 to random cells in the row
+    for row in map:
         for i in range(len(row)):
             if rand.randint(0,3) == 3:
                 row[i] = 1
-    print_2darray(arr)
+    
+    
+    return map
 
+def main():
+    rows, cols = (9, 9)
+    arr = [[0 for i in range(cols)] for j in range(rows)]
+    print_2darray(arr)
+    os.system('cls')
+    arr = gen_map(arr)
+    print_2darray(arr)
+    
     #print("console cleared")
 
 if __name__ == "__main__":
