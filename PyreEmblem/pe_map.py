@@ -4,18 +4,22 @@ global rows; rows = 3
 global cols; cols = 3
 global map_arr; map_arr = [[0 for i in range(cols)] for j in range(rows)]
 
-# set global rows var
-def set_rows(num):
-    global rows; rows = num
 
 # set global cols var
 def set_cols(num):
     global cols; cols = num
 
+# set global rows var
+def set_rows(num):
+    global rows; rows = num
+
 # return the zeroed array result of size c by r
 def gen_map(c, r):
+    global map_arr
+    set_cols(c)
+    set_rows(r)
     result = [[0 for i in range(c)] for j in range(r)]
-    return result
+    map_arr = result
 
 # print map_arr
 def print_map():

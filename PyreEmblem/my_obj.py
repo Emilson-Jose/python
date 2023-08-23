@@ -3,6 +3,7 @@
 import random as rand
 import subprocess as subp
 import os
+import pe_map
 
 global var1; var1 = 0
 global momba; momba = "Monday"
@@ -49,17 +50,20 @@ def gen_map(map):
             if rand.randint(0,3) == 3:
                 row[i] = 1
     
-    
     return map
 
 def main():
     rows, cols = (9, 9)
     arr = [[0 for i in range(cols)] for j in range(rows)]
     print_2darray(arr)
-    os.system('cls')
+    print('===================================================')
+    #os.system('cls')
     arr = gen_map(arr)
-    print_2darray(arr)
-    
+    #print_2darray(arr)
+    pe_map.print_map()
+    print('===================================================')
+    pe_map.gen_map(11, 11)
+    pe_map.print_map()
     #print("console cleared")
 
 if __name__ == "__main__":
