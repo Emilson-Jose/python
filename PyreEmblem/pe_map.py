@@ -48,6 +48,8 @@ def print_map():
         for j in range(0, w):
             if map_arr[i][j] < 10:
                 print("0" + str(map_arr[i][j]), end=' ')
+            elif map_arr[i][j] > 99:
+                print(str(99), end=' ')
             else:
                 print(map_arr[i][j], end=' ')
         print('|')
