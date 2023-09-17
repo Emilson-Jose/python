@@ -1,0 +1,79 @@
+character
+- name
+- class
+    - SF = Sword Fighter
+    - SM = Sword Master
+    - LF = Lance Fighter
+    - LM = Lance Master
+    - AF = Axe Fighter
+    - AM = Axe Master
+    - BF = Bow Fighter
+    - BM = Bow Master
+    - CA = Cavalry
+    - PA = Paladin
+    - KN = Knight
+    - CN = Champion
+    - MG = Mage
+    - WZ = Wizard
+    - TR = Trainee
+    - AD = Adept
+    - PR = Pegasus Rider
+    - AR = Alicorn Rider
+- stats
+    - HP = Hit Points
+    - Atk = Attacking Power
+    - Spd = Speed
+    - Skl = Skill
+    - Lck = Luck
+    - Def = Defense
+    - Res = Resistance
+    - Con = Constitution
+- inventory
+    - main wep
+    - sub wep
+    - healing item
+- level
+    - level ups
+    - exp gain
+
+item
+    - weapon
+        - stats
+            - attack power
+            - durability
+            - range
+            - weight
+            - 
+    - healing item
+        - potion = 10 hit points
+        - elixir = full hit points
+        - tonic = +5 defense, 3 player phases
+        - holy water = +5 resistance, 3 player phases
+
+combat
+
+map
+
+hover info
+    - window 1 = tile information
+        - tile name
+        - avoid bonus
+        - def bonus
+        - res bonus
+        - move penalty/cost
+        - EX:    
+            - -- -- -- -- -- -      - -- -- -- -- -- -      - -- -- -- -- -- -
+            | TREES          |      | MOUNTAIN PEAK  |      | WALL           |
+            | Def 1, Avo  5, |      | Def 1, Avo 35, |      |                |
+            | Res 0, Mov -2  |      | Res 0, Mov -6, |      |                |
+            - -- -- -- -- -- -      - -- -- -- -- -- -      - -- -- -- -- -- -
+    - window 2 = unit
+        - name 
+        - HP gauge
+        - HP
+        - EX:
+            - -- -- -- -- -- -      ~ ~~ ~~ ~~ ~~ ~~ ~
+            | LANCE FIGHTER  |      | ALICORN RIDER  |
+            | ++++++++++     |      | ++++++-===     |
+            | 60/60          |      | 13/20          |
+            - -- -- -- -- -- -      ~ ~~ ~~ ~~ ~~ ~~ ~
