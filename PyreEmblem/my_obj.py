@@ -50,7 +50,13 @@ def main():
            [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
     pe_map.load_map(arr)
     pe_map.print_map()
+    #os.system('cls')
     #print("console cleared")
+
+    #player_units = []      # list of Units controlled by player
+    #enemy_units = []       # list of Units controlled by AI
+
+    
 
 if __name__ == "__main__":
     main()
