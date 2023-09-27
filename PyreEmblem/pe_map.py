@@ -11,14 +11,14 @@ global map_arr; map_arr = [[0 for i in range(cols)] for j in range(rows)]
 #   col 4 = resistance bonus
 #   col 5 = heal per turn
 #   col 6 = movement cost
-global tile_set; tile_set = [['[]', 0, 0, 0, 0, 0],      # floor
+global tile_set; tile_set = [['::', 0, 0, 0, 0, 0],      # floor
                              ['TR', 5, 1, 0, 0, 1],      # trees
                              ['MT', 20, 1, 1, 0, 4],     # mountain
                              ['FT', 12, 2, 2, 0, 0],     # fort
                              ['PK', 35, 1, 0, 0, 6],     # mountain peak
                              ['TH', 12, 2, 4, 4, 0],     # throne
                              ['CH', 10, 0, 1, 10, 0],    # church
-                             ['WA', 0, 0, 0, 0, 99]]    # wall
+                             ['WA', 0, 0, 0, 0, 99]]     # wall
 
 # set global cols var
 def set_cols(num):
@@ -46,6 +46,13 @@ def gen_map(c, r):
 def get_map():
     global map_arr; return map_arr
 
+def print_tile(tile_ind):
+    global tile_set
+    if tile_ind < len(tile_set):
+        return tile_set[tile_ind][0]
+    else:
+        return "~~"
+
 # NEEDS: handle str elements
 #       convert int indicies to tile strings
 #       ensure strings/tiles are 2 char long
@@ -64,12 +71,7 @@ def print_map():
     for i in range(0, h):
         print('|', end=' ')
         for j in range(0, w):
-            if map_arr[i][j] < 10:
-                print("0" + str(map_arr[i][j]), end=' ')
-            elif map_arr[i][j] > 99:
-                print(str(99), end=' ')
-            else:
-                print(map_arr[i][j], end=' ')
+            print(print_tile(map_arr[i][j]), end=' ')
         print('|')
     # print bottom border
     print('-', end=' ')
