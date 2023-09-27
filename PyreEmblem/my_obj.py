@@ -5,6 +5,13 @@ import subprocess as subp
 import os
 import pe_map
 
+global CLASS_BASES; CLASS_BASES = [
+    [20, 5, 1, 1, 0, 1, 8],     # default unit bases
+    [15, 3, 8, 6, 0, 4, 2],     # Sword Fighter
+    [],     # Sword Master
+    [18, 4, 6, 6, 0, 3, 3],     # Lance Fighter
+    [],     # Lance Master
+]
 
 def hit_calc(a_spd, a_hit, d_avd):
     result = 0
