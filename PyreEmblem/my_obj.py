@@ -62,6 +62,7 @@ def main():
     pe_map.load_map(arr)
     pe_map.print_map()
     print('===================================================')
+    # FE8 Chapter 5 map
     arr = [[0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0],
            [0, 7, 3, 7, 7, 3, 7, 7, 7, 7, 0, 0, 1, 0, 0],
            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -90,8 +91,6 @@ def main():
 
     #player_units = []      # list of Units controlled by player
     #enemy_units = []       # list of Units controlled by AI
-
-    
 
 if __name__ == "__main__":
     main()
