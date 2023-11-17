@@ -1,3 +1,4 @@
+# tool file
 # convert csv values to 2d list to copy paste into my_obj.py
 
 import csv
@@ -8,16 +9,16 @@ def main():
         with open('PyreEmblem\map_file.csv', newline='') as f:
             reader = csv.reader(f)
             data = list(reader)
-        print('[', end='')
-        for i in range(len(data)):
-            if i == len(data)-1:
-                print(data[i], end='')
-                print(']')
-            else:
-                print(data[i], end='')
-                print(',')
     except IOError:
         print("Error: could not open map_file")
+    print('[', end='')
+    for i in range(len(data)):
+        if i == len(data)-1:
+            print(data[i], end='')
+            print(']')
+        else:
+            print(data[i], end='')
+            print(',')
 
 if __name__ == "__main__":
     main()

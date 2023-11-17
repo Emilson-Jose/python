@@ -1,4 +1,5 @@
 import random as rand
+import csv
 
 global rows; rows = 3
 global cols; cols = 3
@@ -90,3 +91,12 @@ def load_map(map_preset):
     for i in range(0, h):
         for j in range(0, w):
             map_arr[i][j] = map_preset[i][j]
+
+def csv_to_map():
+    global map_arr
+    try:
+        with open('PyreEmblem\map_file.csv', newline='') as f:
+            reader = csv.reader(f)
+            map_arr = list(reader)
+    except IOError:
+        print("Error: could not open map_file")
