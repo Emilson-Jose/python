@@ -29,12 +29,16 @@ def rn_check(hit):
     else:
         return False
 
-# sets tiles in an array
+# randomly place trees in a map array
 def gen_map(map):
     # for each row, assign 1 to random cells in the row
     for row in map:
         treeChance = 4
         for i in range(len(row)):
+            # forest clumping algorithm
+            #   base tree tile chance is 20%
+            #   if any adjacent tile exists and is a tree tile,
+            #   set chance to ~33%
             if map.index(row)-1 > 0:
                 if map[map.index(row)-1][i] == 1:
                     treeChance = 2
