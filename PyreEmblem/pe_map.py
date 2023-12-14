@@ -47,7 +47,7 @@ def gen_map(c, r):
 def get_map():
     global map_arr; return map_arr
 
-def print_tile(tile_ind):
+def get_tile(tile_ind):
     global tile_set
     if tile_ind < len(tile_set):
         return tile_set[tile_ind][0]
@@ -72,7 +72,7 @@ def print_map():
     for i in range(0, h):
         print('|', end=' ')
         for j in range(0, w):
-            print(print_tile(map_arr[i][j]), end=' ')
+            print(get_tile(map_arr[i][j]), end=' ')
         print('|')
     # print bottom border
     print('-', end=' ')
