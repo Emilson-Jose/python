@@ -1,4 +1,5 @@
 import random as rand
+import os
 
 global BOARD; BOARD = [     # -----------
     [' ', ' ', ' '],        # 3 [X][O][O]  Current player: X
@@ -16,14 +17,24 @@ global CUR_PLY; CUR_PLY = 'X'
 #   - run every turn after P1 moves 3 times
 #   - check only relevant spaces (if the last move 
 #     was bottom right, don't check middle-left)
-def win_check():
+def winCheck():
+
     return True
+
+# change current player
+# out: change CUR_PLY to next player
+def nextPly():
+    global CUR_PLY
+    if CUR_PLY == 'X':
+        CUR_PLY = 'O'
+    else:
+        CUR_PLY = 'X'
 
 # place a player's symbol in the desired square
 # in: current player, {user input}
 # out (valid pos): update BOARD
 # out (invalid pos): prompt user for valid pos
-def place_symbol(pos_xy):
+def placeSymbol(pos_xy):
     global BOARD; global CUR_PLY
     if pos_xy == -1:
         return True
@@ -41,7 +52,7 @@ def place_symbol(pos_xy):
 # out (invalid coord): print error message,
 #                      early escape code for place_symbol
 def resolveInput(input):
-    coord = set(input)
+    coord = list(input)
     if len(coord) != 2:
         print("invalid coordinate: not a letter-digit pair")
         return -1
@@ -93,14 +104,23 @@ def print_game():
     print("-----------")
 
 def main():
+    global BOARD; global CUR_PLY
+    os.system('cls')
     print("\n+----- Tic Tac Toe -----+")
     print("+- Three in a row wins -+\n")
     print_game()
     waitMove = True
-    while(waitMove):
-        user_in = input("Choose a position!: ")
-        waitMove = place_symbol(resolveInput(str(user_in).upper()))
-    print_game()
+    noWinner = True
+    turn_count = 0
+    while(noWinner):
+        while(waitMove):
+            user_in = input("Choose a position!: ")
+            user_move = resolveInput(str(user_in).upper())
+            waitMove = placeSymbol(user_move)
+            turn_count += 1
+        if turn_count > 4 and winCheck(user_move):
+            noWinner = False
+        print_game()
 
 if __name__ == "__main__":
     main()
