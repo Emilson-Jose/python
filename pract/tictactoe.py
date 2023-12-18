@@ -109,17 +109,18 @@ def main():
     print("\n+----- Tic Tac Toe -----+")
     print("+- Three in a row wins -+\n")
     print_game()
-    waitMove = True
-    noWinner = True
+    wait_move = True
+    no_winner = True
     turn_count = 0
-    while(noWinner):
-        while(waitMove):
+    while(no_winner):
+        while(wait_move):
             user_in = input("Choose a position!: ")
             user_move = resolveInput(str(user_in).upper())
-            waitMove = placeSymbol(user_move)
+            wait_move = placeSymbol(user_move)
             turn_count += 1
         if turn_count > 4 and winCheck(user_move):
-            noWinner = False
+            no_winner = False
+            wait_move = True
         print_game()
 
 if __name__ == "__main__":
