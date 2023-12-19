@@ -17,8 +17,8 @@ global CUR_PLY; CUR_PLY = 'X'
 #   - run every turn after P1 moves 3 times
 #   - check only relevant spaces (if the last move 
 #     was bottom right, don't check middle-left)
-def winCheck():
-
+def winCheck(last_move):
+    print(last_move)
     return True
 
 # change current player
@@ -111,17 +111,28 @@ def main():
     print_game()
     wait_move = True
     no_winner = True
-    turn_count = 0
+    moves = 0
     while(no_winner):
+        moves += 1
         while(wait_move):
             user_in = input("Choose a position!: ")
             user_move = resolveInput(str(user_in).upper())
             wait_move = placeSymbol(user_move)
-            turn_count += 1
-        if turn_count > 4 and winCheck(user_move):
-            no_winner = False
-            wait_move = True
         print_game()
+        if moves > 4 and winCheck(user_move):
+            no_winner = False
+        elif moves < 9:
+            wait_move = True
+            nextPly()
+        else:
+            break
+    print("-Game Over-")
+    if no_winner:
+        print("It's a tie!")
+    else:
+        print(" Winner:", CUR_PLY)
+    print("-----------")
+    print()
 
 if __name__ == "__main__":
     main()
