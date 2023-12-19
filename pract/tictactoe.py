@@ -18,7 +18,46 @@ global CUR_PLY; CUR_PLY = 'X'
 #   - check only relevant spaces (if the last move 
 #     was bottom right, don't check middle-left)
 def winCheck(last_move):
-    print(last_move)
+    print(last_move)    # of form: [x,y]
+    # win vectors:
+    #       [0,0] > [0,1] > [0,2]
+    #       []
+    # n [0,1], e [1,2], s [2,1], w [1,0] -2 vectors
+    for n:  # [0,1]
+        [0,0] > [0,2]
+        [1,1] > [2,1]
+    for e:  # [1,2]
+        [0,2] > [2,2]
+        [1,1] > [1,0]
+    for s:  # [2,1]
+        [2,1] > [2,2]
+        [1,1] > [0,1]
+    for w:  # [1,0]
+        [0,0] > [2,0]
+        [1,1] > [1,2]
+    # nw [0,0], ne [0,2], se [2,2], sw [2,0] -3 vectors
+    for nw: # [0,0]
+        [0,1] > [0,2]
+        [1,0] > [2,0]
+        [1,1] > [2,2]
+    for ne: # [0,2]
+        [0,1] > [0,0]
+        [1,2] > [2,2]
+        [1,1] > [2,0]
+    for se: # [2,2]
+        [1,2] > [0,2]
+        [2,1] > [2,0]
+        [1,1] > [0,0]
+    for sw: # [2,0]
+        [1,0] > [0,0]
+        [2,1] > [2,2]
+        [1,1] > [0,2]
+    # mid [1,1] -4 vectors
+    for mid: [1,1]
+        [0,0] > [2,2]
+        [0,1] > [2,1]
+        [0,2] > [2,0]
+        [1,0] > [1,2]
     return True
 
 # change current player
