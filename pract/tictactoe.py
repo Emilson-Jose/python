@@ -20,8 +20,14 @@ global CUR_PLY; CUR_PLY = 'X'
 def winCheck(last_move):
     print(last_move)    # of form: [x,y]
     # win vectors:
-    #       [0,0] > [0,1] > [0,2]
-    #       []
+    #       (0,0), (0,1), (0,2)
+    #       (1,0), (1,1), (1,2)
+    #       (2,0), (2,1), (2,2)
+    #       [0,0], [1,0], [2,0]
+    #       [0,1], [1,1], [2,1]
+    #       [0,2], [1,2], [2,2]
+    #       [0,0], [1,1], [2,2]
+    #       [0,2], [1,1], [2,0]
     # n [0,1], e [1,2], s [2,1], w [1,0] -2 vectors
     for n:  # [0,1]
         [0,0] > [0,2]
@@ -73,13 +79,12 @@ def nextPly():
 # in: current player, {user input}
 # out (valid pos): update BOARD
 # out (invalid pos): prompt user for valid pos
-def placeSymbol(pos_xy):
+def placeSymbol(pos_yx):
     global BOARD; global CUR_PLY
-    if pos_xy == -1:
+    if pos_yx == -1:
         return True
-    pos_y = pos_xy[0]; pos_x = pos_xy[1]
-    if BOARD[pos_y][pos_x] == ' ':
-        BOARD[pos_y][pos_x] = CUR_PLY
+    if BOARD[pos_yx[0]][pos_yx[1]] == ' ':
+        BOARD[pos_yx[0]][pos_yx[1]] = CUR_PLY
         return False
     else:
         print("invalid position: non-empty")
@@ -87,7 +92,7 @@ def placeSymbol(pos_xy):
 
 # convert user input into coordinates
 # in: String user input
-# out (valid coord): list [row, col]
+# out (valid coord): tuple (row, col)
 # out (invalid coord): print error message,
 #                      early escape code for place_symbol
 def resolveInput(input):
@@ -117,7 +122,7 @@ def resolveInput(input):
     else:
         print("invalid coordinate: missing valid letter")
         return -1
-    return out_pos
+    return tuple(out_pos)
 
 # print the game board, current player
 def print_game():
