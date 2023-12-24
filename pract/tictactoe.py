@@ -8,6 +8,8 @@ global BOARD; BOARD = [     # -----------
 ]                           #    A  B  C
                             # -----------
 global CUR_PLY; CUR_PLY = 'X'
+global X_LIST; X_LIST = []
+global O_LIST; O_LIST = []
 
 # check if a move has won the game
 # in: current player, last move, BOARD
@@ -18,20 +20,26 @@ global CUR_PLY; CUR_PLY = 'X'
 #   - check only relevant spaces (if the last move 
 #     was bottom right, don't check middle-left)
 def winCheck(last_move):
-    print(last_move)    # of form: [x,y]
+    global X_LIST; global O_LIST; global CUR_PLY
+    if CUR_PLY == 'X':
+        check_list = X_LIST
+    else:
+        check_list = O_LIST
     # win vectors:
-    #       (0,0), (0,1), (0,2)
-    #       (1,0), (1,1), (1,2)
-    #       (2,0), (2,1), (2,2)
-    #       [0,0], [1,0], [2,0]
-    #       [0,1], [1,1], [2,1]
-    #       [0,2], [1,2], [2,2]
-    #       [0,0], [1,1], [2,2]
-    #       [0,2], [1,1], [2,0]
+    #       (0,0),(0,1),(0,2)
+    #       (1,0),(1,1),(1,2)
+    #       (2,0),(2,1),(2,2)
+    #       (0,0),(1,0),(2,0)
+    #       (0,1),(1,1),(2,1)
+    #       (0,2),(1,2),(2,2)
+    #       (0,0),(1,1),(2,2)
+    #       (0,2),(1,1),(2,0)
     # n [0,1], e [1,2], s [2,1], w [1,0] -2 vectors
-    for n:  # [0,1]
-        [0,0] > [0,2]
-        [1,1] > [2,1]
+    if last_move == (0,1):
+        if [(0,1),(0,0),(0,2)] in check_list or [(0,1),(1,1),(1,2)] in check_list:
+            return True
+        else:
+            return False
     for e:  # [1,2]
         [0,2] > [2,2]
         [1,1] > [1,0]
