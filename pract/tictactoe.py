@@ -1,4 +1,3 @@
-import random as rand
 import os
 
 global BOARD; BOARD = [     # -----------
