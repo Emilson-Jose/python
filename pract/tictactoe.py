@@ -20,59 +20,55 @@ global O_LIST; O_LIST = []
 #   - check only relevant spaces (if the last move 
 #     was bottom right, don't check middle-left)
 def winCheck(last_move):
-    global X_LIST; global O_LIST; global CUR_PLY
+    # n [0,1], e [1,2], s [2,1], w [1,0] -2 vectors
+    if last_move == (0,1):          # upper mid
+        return lineCheck([0,4])
+    elif last_move == (1,2):        # mid right
+        return lineCheck([1,5])
+    elif last_move == (2,1):        # lower mid
+        return lineCheck([2,4])
+    elif last_move == (1,0):        # mid left
+        return lineCheck([0,1])
+    # nw [0,0], ne [0,2], se [2,2], sw [2,0] -3 vectors
+    elif last_move == (0,0):        # upper left
+        return lineCheck([0,3,6])
+    elif last_move == (0,2):        # upper right
+        return lineCheck([0,7,5])
+    elif last_move == (2,2):        # lower right
+        return lineCheck([2,5,6])
+    elif last_move == (2,0):        # lower left
+        return lineCheck([2,3,7])
+    # middle [1,1] -4 vectors
+    elif last_move == (1,1):        # mid mid
+        return lineCheck([1,4,6,7])
+    else:
+        print("Couldn't find last move!")
+        return True
+    
+def lineCheck(lines_ind):
     if CUR_PLY == 'X':
         check_list = X_LIST
     else:
         check_list = O_LIST
-    # win vectors:
-    #       (0,0),(0,1),(0,2)
-    #       (1,0),(1,1),(1,2)
-    #       (2,0),(2,1),(2,2)
-    #       (0,0),(1,0),(2,0)
-    #       (0,1),(1,1),(2,1)
-    #       (0,2),(1,2),(2,2)
-    #       (0,0),(1,1),(2,2)
-    #       (0,2),(1,1),(2,0)
-    # n [0,1], e [1,2], s [2,1], w [1,0] -2 vectors
-    if last_move == (0,1):
-        if [(0,1),(0,0),(0,2)] in check_list or [(0,1),(1,1),(1,2)] in check_list:
-            return True
-        else:
-            return False
-    for e:  # [1,2]
-        [0,2] > [2,2]
-        [1,1] > [1,0]
-    for s:  # [2,1]
-        [2,1] > [2,2]
-        [1,1] > [0,1]
-    for w:  # [1,0]
-        [0,0] > [2,0]
-        [1,1] > [1,2]
-    # nw [0,0], ne [0,2], se [2,2], sw [2,0] -3 vectors
-    for nw: # [0,0]
-        [0,1] > [0,2]
-        [1,0] > [2,0]
-        [1,1] > [2,2]
-    for ne: # [0,2]
-        [0,1] > [0,0]
-        [1,2] > [2,2]
-        [1,1] > [2,0]
-    for se: # [2,2]
-        [1,2] > [0,2]
-        [2,1] > [2,0]
-        [1,1] > [0,0]
-    for sw: # [2,0]
-        [1,0] > [0,0]
-        [2,1] > [2,2]
-        [1,1] > [0,2]
-    # mid [1,1] -4 vectors
-    for mid: [1,1]
-        [0,0] > [2,2]
-        [0,1] > [2,1]
-        [0,2] > [2,0]
-        [1,0] > [1,2]
-    return True
+    win_lines = [
+        [(0,0),(0,1),(0,2)],
+        [(1,0),(1,1),(1,2)],
+        [(2,0),(2,1),(2,2)],
+        [(0,0),(1,0),(2,0)],
+        [(0,1),(1,1),(2,1)],
+        [(0,2),(1,2),(2,2)],
+        [(0,0),(1,1),(2,2)],
+        [(0,2),(1,1),(2,0)]]
+    for ind in lines_ind:
+        for nodes in range(len(win_lines[ind])):
+            if win_lines[ind][nodes] in check_list:
+                if nodes == 2:
+                    return True
+                else:
+                    continue
+            else:
+                break
+    return False
 
 # change current player
 # out: change CUR_PLY to next player
@@ -85,7 +81,7 @@ def nextPly():
 
 # place a player's symbol in the desired square
 # in: current player, {user input}
-# out (valid pos): update BOARD
+# out (valid pos): update BOARD and player LIST
 # out (invalid pos): prompt user for valid pos
 def placeSymbol(pos_yx):
     global BOARD; global CUR_PLY
@@ -93,6 +89,10 @@ def placeSymbol(pos_yx):
         return True
     if BOARD[pos_yx[0]][pos_yx[1]] == ' ':
         BOARD[pos_yx[0]][pos_yx[1]] = CUR_PLY
+        if CUR_PLY == 'X':
+            X_LIST.append(pos_yx)
+        else:
+            O_LIST.append(pos_yx)
         return False
     else:
         print("invalid position: non-empty")
@@ -170,14 +170,15 @@ def main():
             user_in = input("Choose a position!: ")
             user_move = resolveInput(str(user_in).upper())
             wait_move = placeSymbol(user_move)
-        print_game()
         if moves > 4 and winCheck(user_move):
-            no_winner = False
+            no_winner = False        
         elif moves < 9:
-            wait_move = True
             nextPly()
+            wait_move = True
         else:
+            print_game()
             break
+        print_game()
     print("-Game Over-")
     if no_winner:
         print("It's a tie!")
