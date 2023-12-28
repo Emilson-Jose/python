@@ -15,10 +15,6 @@ global O_LIST; O_LIST = []
 # in: current player, last move, BOARD
 # out: True if 3-in-a-row has occured
 #      False if move did not win
-#
-#   - run every turn after P1 moves 3 times
-#   - check only relevant spaces (if the last move 
-#     was bottom right, don't check middle-left)
 def winCheck(last_move):
     # n [0,1], e [1,2], s [2,1], w [1,0] -2 vectors
     if last_move == (0,1):          # upper mid
